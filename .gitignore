@@ -1,0 +1,7 @@
+a.out
+*.exe
+*.swp
+*.gch
+main.c
+.DS_Store
+
