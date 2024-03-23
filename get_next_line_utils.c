@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maymeric <maymeric@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 16:13:35 by maymeric          #+#    #+#             */
-/*   Updated: 2024/03/23 17:45:59 by maymeric         ###   ########.fr       */
+/*   Created: 2024/03/23 16:15:33 by maymeric          #+#    #+#             */
+/*   Updated: 2024/03/23 17:46:37 by maymeric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-
-typedef struct s_list
+void	new_node(t_list *list)
 {
-	char			*str;
-	struct s_list	*next;
-}	t_list;
+	t_list	*aux;
 
-void	new_node(t_list *list);
-
-#endif
+	aux = NULL;
+	list->next = aux;
+}
