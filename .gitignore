@@ -2,6 +2,7 @@ a.out
 *.exe
 *.swp
 *.gch
+*.txt
 main.c
 .DS_Store
 
