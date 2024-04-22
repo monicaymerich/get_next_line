@@ -28,6 +28,6 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void	new_node(t_list *list);
+char	*get_next_line(int fd);
 
 #endif

@@ -12,39 +12,70 @@
 
 #include "get_next_line.h"
 
-int	read_fd(char *buffer, t_list *list)
-{
-	int		i;
-	t_list	*aux;
-	
-	i = 0;
-	if (!buffer)
-		return (-1);
-	new_node(list);
-	while (buffer[i] != '\n' || buffer[i] != '\0')
-	{	
-		aux->str[i] = buffer[i];
-		i++;
-	}
+void	manage_list(t_list **list)
 
-	return (i);
+char	*get_line(t_list *list)
+{
+	int		len;
+	char	*next_str;
+
+	if (list == NULL)
+		return (NULL);
+	len =
+}
+
+void	join_str(t_list **list, char *buf)
+{
+	t_list	*new_node;
+	t_list	*last_node;
+
+	last_node = find_last_node(*list);
+	new_node = malloc(sizeof(t_list));
+	if (new_node == NULL)
+		return ;
+	if (last_node == NULL)
+		return ;
+	else
+		last_node->next = new_node;
+	new_node->str = buf;
+	new_node->next = NULL;
+}
+
+void	create_list(t_list **list, int fd)
+{
+	int		c_read;
+	char	*buf;
+
+	while(find_newline(*list) == 0)
+	{
+		buf = malloc(BUFFER_SIZE + 1);
+		if (buf == NULL)
+			return ;
+		c_read = read(fd, buf, BUFFER_SIZE);
+		if (!c_read)
+		{
+			free(buf);
+			return ;
+		}
+		buf[c_read] = '\0';
+		join_str(list, buf);
+	}
 }
 
 char	*get_next_line(int fd)
 {
-	t_list	*list;
-	char	buffer[BUFFER_SIZE + 1];
-	int		len;
+	static t_list	*list;
+	char			*next_line;
 
-	list = NULL;
-	if (!fd || fd < 0) 
+	*list = NULL;
+	if (!fd || fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0) 
 		return (NULL);
-	if (read(fd, buffer, BUFFER_SIZE) == -1)
+	create_list(&list, fd);
+	if(list == NULL)
 		return (NULL);
-	len = read_fd(buffer, list);
-	if (len == -1)
-		return(NULL);
-	return ();
+	next_line = get_line(list);
+	manage_list(&list);
+	return (next_line);
 }
 
 /*
@@ -56,10 +87,3 @@ void	func_exemple()
 }
 */
 //cada cop que es cridi a la funció x valdrà una mes
-
-int	main(void)
-{
-	char *test;
-	int fd = open("test.txt", O_RDONLY);
-	test = get_next_line(fd);
-}

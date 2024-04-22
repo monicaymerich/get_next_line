@@ -12,10 +12,28 @@
 
 #include "get_next_line.h"
 
-void	new_node(t_list *list)
+int	find_newline(t_list *list)
 {
-	t_list	*aux;
+	int i;
+	int newline;
 
-	aux = NULL;
-	list->next = aux;
+	i = 0;
+	newline = 0;
+	while (list->str[i])
+	{
+		if (list->str[i] != '\n')
+		{
+			newline = -1;
+			return (newline);
+		}
+		i++;
+	}
+	return (newline);
+}
+
+t_list	find_last_node(t_list *list)
+{
+	while(list->next)
+		list = list->next;
+	return (list);
 }
