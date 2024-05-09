@@ -6,13 +6,26 @@
 /*   By: maymeric <maymeric@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 16:13:37 by maymeric          #+#    #+#             */
-/*   Updated: 2024/03/23 17:48:11 by maymeric         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:00:11 by maymeric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	manage_list(t_list **list)
+void	manage_list(t_list **list) //BORRA els chars que a hem cuardat fins al '\n'
+{
+	t_list	*last_node;
+	t_list	*clean_node;
+	int		i;
+	int		k;
+	char	*buf;
+
+	buf = malloc(BUFFER_SIZE + 1);
+	clean_node = malloc(sizeof(t_list));
+	if (buf == NULL || clean_node == NULL)
+		return ;
+	last_node = find_last_node(*list);
+}
 
 char	*get_line(t_list *list)
 {
@@ -21,7 +34,12 @@ char	*get_line(t_list *list)
 
 	if (list == NULL)
 		return (NULL);
-	len =
+	len = len_to_newline(list);
+	next_str = malloc(str_len + 1);
+	if (next_str == NULL)
+		return (NULL);
+	copy_str(list, next_str);
+	return (next_str);
 }
 
 void	join_str(t_list **list, char *buf)
@@ -77,13 +95,3 @@ char	*get_next_line(int fd)
 	manage_list(&list);
 	return (next_line);
 }
-
-/*
-void	func_exemple()
-{
-	static int x = 0; //Sol s'inicialitza una vegada tot i que la cridis més cops
-	printf("%d\n", x);
-	x = x + 1;
-}
-*/
-//cada cop que es cridi a la funció x valdrà una mes
